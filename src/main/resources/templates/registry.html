@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!-- Custom styles for this template -->
+    <link href="#" th:href="@{/css/registry.css}" rel="stylesheet" />
+    <link href="#" th:href="@{/css/style.css}" rel="stylesheet" />
+
+	<title>Registro de Usuario</title>
+</head>
+	<body>
+		<div class="container">
+			<form class="form-registry" action="#" th:action="@{/registro/registrarse}" th:object="${userModel}" method="POST">
+					<h2 class="form-registry-heading">Registro</h2>
+				<div class="form-group">
+					<input type="text" class="form-control" th:field="*{username}" placeholder="Ingrese Nombre de Usuario">
+					<input type="password" class="form-control" th:field=*{password} placeholder="Ingrese Contraseña">
+					<input type="password" class="form-control" id="re-password" placeholder="Repita la Contraseña">
+				</div>
+				<button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+			</form>
+		</div>
+	</body>
+</html>
