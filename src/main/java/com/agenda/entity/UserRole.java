@@ -19,7 +19,7 @@ public class UserRole {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER )
 	@JoinColumn(name = "username", nullable = false)
 	private User user;
 	@Column(name = "role", nullable = false, length = 45)

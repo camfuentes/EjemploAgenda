@@ -4,6 +4,6 @@ import com.agenda.model.UserModel;
 
 public interface UserService {
 	
-	public void createUser(UserModel userModel);
+	public boolean createUser(UserModel userModel);
 	
 }

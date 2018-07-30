@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.agenda.constant.ViewConstant;
 import com.agenda.model.UserModel;
@@ -28,9 +29,11 @@ public class RegistyController {
 	}
 	
 	@PostMapping("/registrarse")
-	public String registrase(@ModelAttribute("userModel") UserModel userModel) {
-		userService.createUser(userModel);
-		return ViewConstant.LOGIN;
+	public String registrase(@ModelAttribute("userModel") UserModel userModel, RedirectAttributes attributes) {
+		if (userService.createUser(userModel)) {
+			attributes.addFlashAttribute("registry", "Usuario Registrado Satisfactoriamente");
+		}
+		return "redirect:/" + ViewConstant.LOGIN;
 	}
 
 }

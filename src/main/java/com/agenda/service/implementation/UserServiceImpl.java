@@ -50,15 +50,18 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 	}
 
 	@Override
-	public void createUser(UserModel userModel) {
+	public boolean createUser(UserModel userModel) {
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 		com.agenda.entity.User user = new com.agenda.entity.User();
 		user = userConverter.modelToEntity(userModel);
 		user.setPassword(pe.encode(userModel.getPassword()));
-		UserRole userRole = new UserRole(userConverter.modelToEntity(userModel), "ROLE_USER");
+		UserRole userRole = new UserRole(userConverter.modelToEntity(userModel),"ROLE_USER");
 		user.getUserRole().add(userRole);
-		userRepository.save(user);
-		System.out.println(user);
+		user = userRepository.save(user);
+		if	(null != user) {
+			return true;
+		}
+		return false;
 	}
 
 }

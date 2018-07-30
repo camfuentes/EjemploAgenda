@@ -1,10 +1,5 @@
 package com.agenda.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import com.agenda.entity.UserRole;
-
 public class UserModel {
 
 	private String username;

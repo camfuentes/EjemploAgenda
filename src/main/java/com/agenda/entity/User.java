@@ -22,7 +22,7 @@ public class User {
 	private String password;
 	@Column(name = "enabled", nullable = false)
 	private boolean enabled;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade={CascadeType.ALL})
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade=CascadeType.ALL)
 	private Set<UserRole> userRole = new HashSet<UserRole>();
 
 	public User() {

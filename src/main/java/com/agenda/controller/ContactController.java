@@ -34,7 +34,7 @@ public class ContactController {
 	public ModelAndView contacts() {
 		ModelAndView mav = new ModelAndView(ViewConstant.CONTACTS);
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		mav.addObject("contactModel", contactService.listAll());
+		mav.addObject("contactModel", contactService.listByUsername(user.getUsername()));
 		mav.addObject("username", user.getUsername());
 		return mav;
 	}
@@ -53,7 +53,8 @@ public class ContactController {
 	@PostMapping("/addcontact")
 	public String addContact(@ModelAttribute("contactModel") ContactModel contactModel, RedirectAttributes attributes) {
 		LOG.info("METHOD : addContact() -- PARAMS : '" + contactModel.toString() + "'");
-		ContactModel contact = contactService.addContact(contactModel);
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		ContactModel contact = contactService.addContact(contactModel, user.getUsername());
 		if (null != contact) {
 			if (contactModel.getId() == null) {
 				attributes.addFlashAttribute("result", "Contact Added Successfully");

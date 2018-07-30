@@ -27,6 +27,8 @@
         <input type="password"  class="form-control" placeholder="Password" name="password" id="password"/>
         <div th:if="${error != null}" class="alert alert-danger" role="alert">Invalid username of password</div>
         <div th:if="${logout != null}" class="alert alert-info" role="alert">Logout successfully</div>
+        <div th:if="${registry != null}" class="alert alert-success" role="alert"><span th:text="${registry}"></span></div>
+        
         <button class="btn btn-lg btn-primary btn-block" type="submit">
         	<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Sign in
         </button>

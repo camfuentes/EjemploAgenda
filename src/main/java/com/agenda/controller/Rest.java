@@ -38,13 +38,16 @@ public class Rest {
 	@PostMapping
 	@ResponseBody
 	public List<ContactModel> addContact(@RequestBody ContactModel contactModel){
-		contactService.addContact(contactModel);
-		return contactService.listAll();
+		//TODO - actualizar servicio rest
+		/*contactService.addContact(contactModel);
+		return contactService.listAll();*/
+		return null;
 	}
 	
 	@PutMapping("/{id}")
 	public void updateContact (@PathVariable Long id, @RequestBody ContactModel contactModel) {
-		contactService.updateContact(id, contactModel);
+		//TODO - actualizar servicio rest
+		/*contactService.updateContact(id, contactModel);*/
 	}
 	
 	@DeleteMapping("/{id}")

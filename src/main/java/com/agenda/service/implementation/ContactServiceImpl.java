@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.agenda.converter.ContactConverter;
 import com.agenda.entity.Contact;
+import com.agenda.entity.User;
 import com.agenda.model.ContactModel;
 import com.agenda.repository.ContactRepository;
 import com.agenda.service.ContactService;
@@ -32,24 +33,38 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	@Override
+	public List<ContactModel> listByUsername(String username) {
+		List<Contact> contacts = contactRepository.findByUser_username(username);
+		List<ContactModel> contactsModel = new ArrayList<>();
+		for (Contact c : contacts) {
+			contactsModel.add(contactConverter.EntityToModel(c));
+		}
+		return contactsModel;
+	}
+
+	@Override
 	public ContactModel getContact(Long id) {
 		return contactConverter.EntityToModel(contactRepository.findById(id).get());
 	}
 
 	@Override
-	public ContactModel addContact(ContactModel contactModel) {
-		return contactConverter.EntityToModel(contactRepository.save(contactConverter.ModelToEntity(contactModel)));
+	public ContactModel addContact(ContactModel contactModel, String username) {
+		Contact contact = contactConverter.ModelToEntity(contactModel);
+		User user = new User();
+		user.setUsername(username);
+		contact.setUser(user);
+		return contactConverter.EntityToModel(contactRepository.save(contact));
 	}
 
 	@Override
-	public ContactModel updateContact(Long id, ContactModel contactModel) {
+	public ContactModel updateContact(Long id, ContactModel contactModel, String username) {
 		ContactModel model = getContact(id);
 		if (null != model) {
 			model.setFirstname(contactModel.getFirstname());
 			model.setLastname(contactModel.getLastname());
 			model.setTelephone(contactModel.getTelephone());
 			model.setCity(contactModel.getCity());
-			return addContact(model);
+			return addContact(model,username);
 		}
 		return null;
 	}
